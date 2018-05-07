@@ -6,3 +6,10 @@
 - cd shiny-rep-backend
 - npm i
 - npm run start
+
+
+## TODO
+- [ ] validate email address
+- [ ] add endpoints for:
+  - GET `/todolist` returns a list of todos
+  - POST `/todolist` with body: `{ todo: 'my todo' }` adds a todo into the local storage, and insert the timestamp into it so the todo object looks like `{ todo: 'my todo', created: '2018-09-01' }`
