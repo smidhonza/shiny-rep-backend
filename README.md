@@ -11,5 +11,9 @@
 ## TODO
 - [ ] validate email address
 - [ ] add endpoints for:
-  - GET `/todolist` returns a list of todos
+  - GET `/` returns a list of blogposts
   - POST `/todolist` with body: `{ todo: 'my todo' }` adds a todo into the local storage, and insert the timestamp into it so the todo object looks like `{ todo: 'my todo', created: '2018-09-01' }`
+
+
+
+ // const token = `${userId}-${Math.floor(Math.random() * 1000)}`;
