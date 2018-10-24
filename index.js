@@ -2,13 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { login, register, users } = require("./users");
 const { posts, addPost } = require("./posts");
+const { getTokens } = require("./auth");
 const app = express();
 const port = 1234;
 
 app.use(bodyParser.json());
 
 app.get('/', (request, response) => {
-    response.json({ users, posts });
+    response.json({
+      users,
+      posts,
+      tokens: getTokens(),
+    });
 });
 
 app.post('/register', register);

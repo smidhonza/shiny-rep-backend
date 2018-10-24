@@ -1,4 +1,4 @@
-const { getUserIdFromToken } = require('./auth');
+const { getUserIdFromToken, getTokens, updateExpirationTime } = require('./auth');
 const posts = [];
 
 const addPost = (request, response) => {
@@ -20,9 +20,22 @@ const addPost = (request, response) => {
     const created = Date.now();
 
     const userId = getUserIdFromToken(token);
-    // todo: check if user with this userId exists
+    if (!userId) {
+      return response.json({ status:"error", message:"invalid token"})
+    };
+
+    const validToken = getTokens().find((a) => a.userId === userId && a.token === token);
+    if (!validToken) {
+      return response.json({ status:"error", message:"token not found"})
+    }
+
+    if (Date.now() > validToken.expireAt) {
+      return response.json({ status:"error", message:"token has expired"})
+    }
 
     posts.push({ title, text, created, userId });
+
+    updateExpirationTime(validToken);
 
     response.json({ status: 'ok' });
 };
